@@ -56,16 +56,10 @@ div {
   <form>
     <label for="brand">Марка</label>
     <select id="brand" name="brand">
-      <option value="any">Любая</option>
     </select>
 
     <label for="model">Модель</label>
-    <select id="model" name="model">
-      <option value="any">Любая</option>
-      <option value="audi">Audi</option>
-      <option value="bmw">BMW</option>
-      <option value="chevrolet">Chevrolet</option>
-      <option value="daewoo">Daewoo</option>
+    <select id="model" name="model" disabled>
     </select>
 
     <label for="price">Цена в $</label>
@@ -88,6 +82,7 @@ div {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
   var brands = [
+    { value: "any", text: "Любая" },
     { value: "audi", text: "Audi" },
     { value: "bmw", text: "BMW" },
     { value: "chevrolet", text: "Chevrolet" },
@@ -107,9 +102,41 @@ div {
     { value: "toyota", text: "Toyota" },
     { value: "volkswagen", text: "Volkswagen" },
   ];
+  var models = {
+    "audi" : [
+      { value: "80", text: "80" },
+      { value: "90", text: "90" },
+      { value: "100", text: "100" },
+      { value: "a3", text: "A3" },
+      { value: "a4", text: "A4" },
+      { value: "a5", text: "A5" },
+      { value: "a6", text: "A6" },
+      { value: "a7", text: "A7" },
+      { value: "a8", text: "A8" },
+      { value: "q3", text: "Q3" },
+      { value: "q5", text: "Q5" },
+      { value: "q7", text: "Q7" },
+      { value: "s4", text: "S4" },
+      { value: "tt", text: "TT" },
+    ],
+  };
   for (var i = 0; i < brands.length; ++i) {
     $('#brand').append(`<option value="${brands[i].value}">${brands[i].text}</option>`);
   }
+  $('#brand').on('click', function() {
+    var brand = $('#brand').find(':selected').val();
+    if (brand in models) {
+      $('#model')
+        .empty()
+        .attr('disabled', false)
+        .append(`<option value="any">Любая</option>`);
+      for (var i = 0; i < models[brand].length; ++i) {
+        $('#model').append(`<option value="${models[brand][i].value}">${models[brand][i].text}</option>`);
+      }
+    } else {
+      $('#model').empty().attr('disabled', true);
+    }
+  });
 </script>
 </html>
 
