@@ -138,22 +138,27 @@ div {
       { value: "sportage", text: "Sportage" },
     ]
   };
-  for (var i = 0; i < brands.length; ++i) {
-    $('#brand').append(`<option value="${brands[i].value}">${brands[i].text}</option>`);
-  }
-  $('#brand').on('click', function() {
-    var brand = $('#brand').find(':selected').val();
-    if (brand in models) {
-      $('#model')
-        .empty()
-        .attr('disabled', false)
-        .append(`<option value="any">Любая</option>`);
-      for (var i = 0; i < models[brand].length; ++i) {
-        $('#model').append(`<option value="${models[brand][i].value}">${models[brand][i].text}</option>`);
+  $(document).ready(function() {
+    $.each(brands, function(key, obj) {
+      $('#brand')
+        .append(`<option value="${obj.value}">${obj.text}</option>`);
+    });
+    $('#brand').on('change', function() {
+      var brand = this.value;
+      if (brand in models) {
+        $('#model')
+          .empty()
+          .attr('disabled', false)
+          .append(`<option value="any">Любая</option>`);
+        $.each(models[brand], function(key, obj) {
+          $('#model').append(`<option value="${obj.value}">${obj.text}</option>`);
+        });
+      } else {
+        $('#model')
+          .empty()
+          .attr('disabled', true);
       }
-    } else {
-      $('#model').empty().attr('disabled', true);
-    }
+    });
   });
 </script>
 </html>
