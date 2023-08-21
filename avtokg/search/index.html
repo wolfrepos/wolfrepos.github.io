@@ -80,8 +80,9 @@ div {
 </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
-  var brands = [
+  const brands = [
     { value: "any", text: "Любая" },
     { value: "audi", text: "Audi" },
     { value: "bmw", text: "BMW" },
@@ -102,7 +103,7 @@ div {
     { value: "toyota", text: "Toyota" },
     { value: "volkswagen", text: "Volkswagen" },
   ];
-  var models = {
+  const models = {
     "audi" : [
       { value: "80", text: "80" },
       { value: "90", text: "90" },
@@ -144,7 +145,7 @@ div {
         .append(`<option value="${obj.value}">${obj.text}</option>`);
     });
     $('#brand').on('change', function() {
-      var brand = this.value;
+      const brand = this.value;
       if (brand in models) {
         $('#model')
           .empty()
@@ -160,6 +161,27 @@ div {
       }
     });
   });
+
+  const mainButton = window.Telegram.WebApp.MainButton;
+  mainButton.text = "Найти";
+  mainButton.enable();
+  mainButton.show();
+  mainButton.onClick(
+    function() {
+      window.Telegram.WebApp.sendData(
+        JSON.stringify(
+          {
+            "brand" : $('#brand').val(),
+            "model" : $('#model').val(),
+            "price_min" : $('#price-min').val(),
+            "price_max" : $('#price-max').val(),
+            "year" : $('#year').val(),
+          }
+        )
+      );
+    }
+  );
+
 </script>
 </html>
 
