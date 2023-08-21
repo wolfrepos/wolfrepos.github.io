@@ -59,10 +59,6 @@ div {
     <label for="brand">Марка</label>
     <select id="brand" name="brand">
       <option value="any">Любая</option>
-      <option value="audi">Audi</option>
-      <option value="bmw">BMW</option>
-      <option value="chevrolet">Chevrolet</option>
-      <option value="daewoo">Daewoo</option>
     </select>
 
     <label for="model">Модель</label>
@@ -90,8 +86,33 @@ div {
     </select>
   </form>
 </div>
-
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+  var brands = [
+    { value: "audi", text: "Audi" },
+    { value: "bmw", text: "BMW" },
+    { value: "chevrolet", text: "Chevrolet" },
+    { value: "daewoo", text: "Daewoo" },
+    { value: "ford", text: "Ford" },
+    { value: "honda", text: "Honda" },
+    { value: "hyndai", text: "Hyundai" },
+    { value: "kia", text: "Kia" },
+    { value: "lexus", text: "Lexus" },
+    { value: "mazda", text: "Mazda" },
+    { value: "mers", text: "Mercedes-Benz" },
+    { value: "mitsubishi", text: "Mitsubishi" },
+    { value: "nissan", text: "Nissan" },
+    { value: "opel", text: "Opel" },
+    { value: "renault", text: "Renault" },
+    { value: "subaru", text: "Subaru" },
+    { value: "toyota", text: "Toyota" },
+    { value: "volkswagen", text: "Volkswagen" },
+  ];
+  for (var i = 0; i < brands.length; ++i) {
+    $('#brand').append(`<option value="${brands[i].value}">${brands[i].text}</option>`);
+  }
+</script>
 </html>
 
 
