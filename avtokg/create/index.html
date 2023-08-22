@@ -7,27 +7,19 @@
 <div>
   <form>
     <label for="brand">Марка</label>
-    <select id="brand" name="brand">
-    </select>
+    <select id="brand" name="brand"></select>
 
     <label for="model">Модель</label>
-    <select id="model" name="model" disabled>
-    </select>
-
-    <label for="price">Цена в $</label>
-    <input type="number" id="price-min" name="price-min" placeholder="От">
-    <input type="number" id="price-max" name="price-max" placeholder="До">
+    <select id="model" name="model" disabled></select>
 
     <label for="year">Год</label>
-    <select id="year" name="year">
-      <option value="any">Любой</option>
-      <option value="2023">2023</option>
-      <option value="2022">2022</option>
-      <option value="2021">2021</option>
-      <option value="2020">2020</option>
-      <option value="2019">2019</option>
-      <option value="2018">2018</option>
-    </select>
+    <select id="year" name="year"></select>
+
+    <label for="price">Цена в $</label>
+    <input type="number" id="price" name="price" placeholder="Цена">
+
+    <label for="price">Описание</label>
+    <textarea id="text" name="text" placeholder="Описание" rows="5"></textarea>
   </form>
 </div>
 </body>
@@ -46,9 +38,9 @@
           {
             "brand" : $('#brand').val(),
             "model" : $('#model').val(),
-            "price_min" : $('#price-min').val(),
-            "price_max" : $('#price-max').val(),
+            "price" : $('#price').val(),
             "year" : $('#year').val(),
+            "text" : $('#text').val(),
           }
         )
       );

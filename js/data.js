@@ -77,4 +77,7 @@ $(document).ready(function() {
         .attr('disabled', true);
     }
   });
+  $('#year').append(`<option value="any">Любой</option>`);
+  for (var i = 2023; i >= 1980; --i)
+    $('#year').append(`<option value="${i}">${i}</option>`);
 });
