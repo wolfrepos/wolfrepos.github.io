@@ -9,11 +9,7 @@
         <select id="brand" name="brand"></select>
         <select id="model" name="model" disabled></select>
         <select id="year" name="year"></select>
-        <label for="transmission">Трансмиссия</label>
         <div class="button-group">
-          <button type="button" class="button button-pressed" id="today">
-            Любая
-          </button>
           <button type="button" class="button button-default" id="today">
             Механика
           </button>
@@ -27,11 +23,22 @@
             Робот
           </button>
         </div>
+        <div class="button-group">
+          <button type="button" class="button button-default" id="today">
+            Левый руль
+          </button>
+          <button type="button" class="button button-default" id="today">
+            Правый руль
+          </button>
+        </div>
+
+        <label for="price">Пробег в км.</label>
+        <input type="number" id="mileage" name="mileage" placeholder="Пробег в км." />
 
         <label for="price">Цена в $</label>
-        <input type="number" id="price" name="price" placeholder="Цена" />
+        <input type="number" id="price" name="price" placeholder="Цена в $" />
 
-        <label for="text">Описание</label>
+        <label for="text">Доп. описание</label>
         <textarea
           id="text"
           name="text"

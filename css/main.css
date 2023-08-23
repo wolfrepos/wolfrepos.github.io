@@ -7,8 +7,8 @@ input[type="text"],
 select,
 textarea {
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  padding: 2vw;
+  margin: 2vw 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 1vw;
@@ -17,9 +17,9 @@ textarea {
 }
 
 input[type="number"] {
-  width: 49%;
+  width: 49.5%;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin: 2vw 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 1vw;
@@ -27,7 +27,7 @@ input[type="number"] {
   font-size: 4vw;
 }
 
-#price {
+#price, #mileage {
   width: 100%;
 }
 
@@ -55,18 +55,11 @@ div {
 }
 
 .button-group .button:first-child {
-    border-radius: 6px 0 0 6px;
+  border-radius: 6px 6px 0 0;
 }
-
 
 .button-group .button:last-child {
-    border-radius: 0 6px 6px 0;
-    margin-left: -1px;
-}
-
-.button-group .button:only-child {
-    border-radius: 6px;
-    margin-left: 0;
+  border-radius: 0 0 6px 6px;
 }
 
 .button-group:after {
@@ -76,19 +69,19 @@ div {
 }
 
 .button-group button:not(:last-child) {
-  border-right: none; /* Prevent double borders */
+  border-bottom: none; /* Prevent double borders */
 }
 
-.button-default, .button-pressed {
-  width: auto;
+.button-default,
+.button-pressed {
+  width: 100%;
   padding: 2.5%;
   display: inline;
   border: 1px solid #ccc;
   background-color: #fff;
   border-radius: 1vw;
   box-sizing: border-box;
-  font-size: 3vw;
-  float: left;
+  font-size: 4vw;
 }
 
 .button-pressed {
