@@ -6,18 +6,54 @@
   <body>
     <div>
       <form>
-        <label for="brand">Бренд</label>
         <select id="brand" name="brand"></select>
-
-        <label for="model">Модель</label>
         <select id="model" name="model" disabled></select>
-
-        <label for="year">Год</label>
         <select id="year" name="year"></select>
+
+        <div class="button-group">
+          <button type="button" class="button button-pressed" id="today">
+            Любая
+          </button>
+          <button type="button" class="button button-default" id="today">
+            Механика
+          </button>
+          <button type="button" class="button button-default" id="this_week">
+            Автомат
+          </button>
+          <button type="button" class="button button-default" id="this_month">
+            Вариатор
+          </button>
+          <button type="button" class="button button-default" id="custom">
+            Робот
+          </button>
+        </div>
+
+        <div class="button-group">
+          <button type="button" class="button button-pressed" id="today">
+            Любой
+          </button>
+          <button type="button" class="button button-default" id="today">
+            Левый руль
+          </button>
+          <button type="button" class="button button-default" id="today">
+            Правый руль
+          </button>
+        </div>
+
+        <label for="price">Максимальный пробег в км.</label>
+        <input
+          type="number"
+          id="mileage-max"
+          name="mileage-max"
+          placeholder="км."
+        />
 
         <label for="price">Цена в $</label>
         <input type="number" id="price-min" name="price-min" placeholder="От" />
         <input type="number" id="price-max" name="price-max" placeholder="До" />
+
+        <label for="city">Город</label>
+        <select id="city" name="city"></select>
       </form>
     </div>
   </body>

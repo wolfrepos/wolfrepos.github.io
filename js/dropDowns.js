@@ -85,3 +85,11 @@ $(document).ready(function () {
   for (var i = 2023; i >= 1980; --i)
     $("#year").append(`<option value="${i}">${i}</option>`);
 });
+
+$(".button-group").on("click", ".button", function () {
+  $(this)
+    .addClass("button-pressed")
+    .siblings()
+    .removeClass("button-pressed")
+    .addClass("button-default");
+});
