@@ -6,27 +6,24 @@
   <body>
     <div>
       <form>
-        <label for="brand">Бренд</label>
         <select id="brand" name="brand"></select>
-
-        <label for="model">Модель</label>
         <select id="model" name="model" disabled></select>
-
-        <label for="year">Год</label>
         <select id="year" name="year"></select>
-
-        <label for="year">Трансмиссия</label>
-        <div class="btn-group">
-          <button type="button" class="btn btn-default" id="today">
+        <label for="transmission">Трансмиссия</label>
+        <div class="button-group">
+          <button type="button" class="button button-pressed" id="today">
+            Любая
+          </button>
+          <button type="button" class="button button-default" id="today">
             Механика
           </button>
-          <button type="button" class="btn btn-default" id="this_week">
+          <button type="button" class="button button-default" id="this_week">
             Автомат
           </button>
-          <button type="button" class="btn btn-default" id="this_month">
+          <button type="button" class="button button-default" id="this_month">
             Вариатор
           </button>
-          <button type="button" class="btn btn-default" id="custom">
+          <button type="button" class="button button-default" id="custom">
             Робот
           </button>
         </div>
@@ -90,6 +87,13 @@
           mainButton.hide();
         }
       }
+    });
+    $(".button-group").on("click", ".button", function () {
+      $(this)
+        .addClass("button-pressed")
+        .siblings()
+        .removeClass("button-pressed")
+        .addClass("button-default");
     });
   </script>
 </html>

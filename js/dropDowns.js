@@ -1,5 +1,5 @@
 const brands = [
-  { value: "any", text: "Любая" },
+  { value: "any", text: "Любой бренд" },
   { value: "audi", text: "Audi" },
   { value: "bmw", text: "BMW" },
   { value: "chevrolet", text: "Chevrolet" },
@@ -66,15 +66,22 @@ $(document).ready(function () {
       $("#model")
         .empty()
         .attr("disabled", false)
-        .append(`<option value="any">Любая</option>`);
+        .append(`<option value="any">Любая модель</option>`);
       $.each(models[brand], function (key, obj) {
         $("#model").append(`<option value="${obj.value}">${obj.text}</option>`);
       });
     } else {
-      $("#model").empty().attr("disabled", true);
+      $("#model")
+        .empty()
+        .attr("disabled", true)
+        .append(`<option value="any">Любая модель</option>`);
     }
   });
-  $("#year").append(`<option value="any">Любой</option>`);
+  $("#model")
+    .empty()
+    .attr("disabled", true)
+    .append(`<option value="any">Любая модель</option>`);
+  $("#year").append(`<option value="any">Любой год</option>`);
   for (var i = 2023; i >= 1980; --i)
     $("#year").append(`<option value="${i}">${i}</option>`);
 });

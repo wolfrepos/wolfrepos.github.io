@@ -42,18 +42,56 @@ div {
   margin: 2%;
 }
 
-.btn-group {
+/* Buttons */
+
+.button-group {
   margin: 0%;
-  padding: 1% 0%;
+  padding: 3% 0%;
   width: 100%;
 }
 
-.btn-default {
+.button-group .button {
+  border-radius: 0;
+}
+
+.button-group .button:first-child {
+    border-radius: 6px 0 0 6px;
+}
+
+
+.button-group .button:last-child {
+    border-radius: 0 6px 6px 0;
+    margin-left: -1px;
+}
+
+.button-group .button:only-child {
+    border-radius: 6px;
+    margin-left: 0;
+}
+
+.button-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.button-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+.button-default, .button-pressed {
   width: auto;
-  padding: 2%;
+  padding: 2.5%;
   display: inline;
   border: 1px solid #ccc;
+  background-color: #fff;
   border-radius: 1vw;
   box-sizing: border-box;
-  font-size: 4vw;
+  font-size: 3vw;
+  float: left;
+}
+
+.button-pressed {
+  border: 1px solid #aaa;
+  background-color: #ccc;
 }
