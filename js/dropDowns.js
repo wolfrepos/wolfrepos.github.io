@@ -56,6 +56,12 @@ const models = {
   ],
 };
 
+const cities = [
+  { value: "any", text: "Любой" },
+  { value: "bishkek", text: "Бишкек" },
+  { value: "osh", text: "Ош" },
+];
+
 $(document).ready(function () {
   $.each(brands, function (key, obj) {
     $("#brand").append(`<option value="${obj.value}">${obj.text}</option>`);
@@ -84,12 +90,16 @@ $(document).ready(function () {
   $("#year").append(`<option value="any">Любой год</option>`);
   for (var i = 2023; i >= 1980; --i)
     $("#year").append(`<option value="${i}">${i}</option>`);
-});
 
-$(".button-group").on("click", ".button", function () {
-  $(this)
-    .addClass("button-pressed")
-    .siblings()
-    .removeClass("button-pressed")
-    .addClass("button-default");
+  $.each(cities, function (key, obj) {
+    $("#city").append(`<option value="${obj.value}">${obj.text}</option>`);
+  });
+
+  $(".button-group").on("click", ".button", function () {
+    $(this)
+      .addClass("button-pressed")
+      .siblings()
+      .removeClass("button-pressed")
+      .addClass("button-default");
+  });
 });

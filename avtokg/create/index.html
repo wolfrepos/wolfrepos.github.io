@@ -9,25 +9,27 @@
         <select id="brand" name="brand"></select>
         <select id="model" name="model" disabled></select>
         <select id="year" name="year"></select>
-        <div class="button-group">
-          <button type="button" class="button button-default" id="today">
+
+        <div id="transmission" class="button-group">
+          <button type="button" class="button button-default" id="manual">
             Механика
           </button>
-          <button type="button" class="button button-default" id="this_week">
+          <button type="button" class="button button-default" id="automatic">
             Автомат
           </button>
-          <button type="button" class="button button-default" id="this_month">
+          <button type="button" class="button button-default" id="variator">
             Вариатор
           </button>
-          <button type="button" class="button button-default" id="custom">
+          <button type="button" class="button button-default" id="robot">
             Робот
           </button>
         </div>
-        <div class="button-group">
-          <button type="button" class="button button-default" id="today">
+
+        <div id="steering" class="button-group">
+          <button type="button" class="button button-default" id="left">
             Левый руль
           </button>
-          <button type="button" class="button button-default" id="today">
+          <button type="button" class="button button-default" id="right">
             Правый руль
           </button>
         </div>
@@ -64,16 +66,31 @@
           brand: $("#brand").val(),
           model: $("#model").val(),
           year: $("#year").val(),
+          transmission: $("#transmission").find(".button-pressed").attr("id"),
+          steering: $("#steering").find(".button-pressed").attr("id"),
+          mileage: parseInt($("#mileage").val(), 10),
           price: parseInt($("#price").val(), 10),
+          phone: $("#phone").val(),
+          city: $("#city").val(),
           text: $("#text").val(),
         };
+        Object.keys(data).forEach(
+          (key) =>
+            (data[key] =
+              data[key] === "any" || data[key] === "" ? null : data[key])
+        );
         if (
-          data.brand !== "any" &&
+          data.brand &&
           data.model &&
-          data.model !== "any" &&
-          data.year !== "any" &&
-          data.price
+          data.year &&
+          data.transmission &&
+          data.steering &&
+          data.mileage &&
+          data.price &&
+          data.phone &&
+          data.city
         ) {
+          console.log("REAAAAAAAAAAAAAAAAAADY!!!");
           enableSubmit(true);
         } else {
           enableSubmit(false);
@@ -82,9 +99,13 @@
       }
       $("#brand").on("change", collectData);
       $("#model").on("change", collectData);
-      $("#price").on("input", collectData);
       $("#year").on("change", collectData);
-      $("#text").on("change", collectData);
+      $("#transmission").on("click", collectData);
+      $("#steering").on("click", collectData);
+      $("#mileage").on("input", collectData);
+      $("#price").on("input", collectData);
+      $("#phone").on("input", collectData);
+      $("#city").on("change", collectData);
 
       const mainButton = window.Telegram.WebApp.MainButton;
       mainButton.text = "Опубликовать";
