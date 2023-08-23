@@ -72,7 +72,7 @@
           price: parseInt($("#price").val(), 10),
           phone: $("#phone").val(),
           city: $("#city").val(),
-          text: $("#text").val(),
+          description: $("#text").val(),
         };
         Object.keys(data).forEach(
           (key) =>
@@ -90,7 +90,6 @@
           data.phone &&
           data.city
         ) {
-          console.log("REAAAAAAAAAAAAAAAAAADY!!!");
           enableSubmit(true);
         } else {
           enableSubmit(false);
