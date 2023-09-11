@@ -39,7 +39,7 @@
             return data;
         }
         $("#category").on("change", collectData);
-        $("#amount").on("change", collectData);
+        $("#amount").on("input", collectData);
 
         const mainButton = window.Telegram.WebApp.MainButton;
         mainButton.text = "Опубликовать";
