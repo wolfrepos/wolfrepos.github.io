@@ -25,3 +25,11 @@ $(document).ready(function () {
     $("#category").append(`<option value="${obj.value}">${obj.text}</option>`);
   });
 });
+
+$(".button-group").on("click", ".button", function () {
+  $(this)
+    .addClass("button-pressed")
+    .siblings()
+    .removeClass("button-pressed")
+    .addClass("button-default");
+});
