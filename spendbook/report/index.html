@@ -36,11 +36,6 @@
             (data[key] =
               data[key] === "any" || data[key] === "" ? null : data[key])
         );
-        if (data.month && data.year) {
-          enableSubmit(true);
-        } else {
-          enableSubmit(false);
-        }
         return data;
       }
       $("#month").on("change", collectData);
@@ -49,17 +44,10 @@
       const mainButton = window.Telegram.WebApp.MainButton;
       mainButton.text = "Получить отчет";
       mainButton.enable();
+      mainButton.show();
       mainButton.onClick(function () {
         window.Telegram.WebApp.sendData(JSON.stringify(collectData()));
       });
-
-      function enableSubmit(activate) {
-        if (activate) {
-          mainButton.show();
-        } else {
-          mainButton.hide();
-        }
-      }
     });
   </script>
 </html>
