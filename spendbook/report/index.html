@@ -8,25 +8,15 @@
     <div>
       <form>
         <label for="month">Месяц</label>
-        <div id="month" class="button-group">
-          <button type="button" class="button button-default" id="1">Январь</button>
-          <button type="button" class="button button-default" id="2">Февраль</button>
-          <button type="button" class="button button-default" id="3">Март</button>
-          <button type="button" class="button button-default" id="4">Апрель</button>
-          <button type="button" class="button button-default" id="5">Май</button>
-          <button type="button" class="button button-default" id="6">Июнь</button>
-          <button type="button" class="button button-default" id="7">Июль</button>
-          <button type="button" class="button button-default" id="8">Август</button>
-          <button type="button" class="button button-default" id="9">Сентябрь</button>
-          <button type="button" class="button button-default" id="10">Октябрь</button>
-          <button type="button" class="button button-default" id="11">Ноябрь</button>
-          <button type="button" class="button button-default" id="12">Декабрь</button>
-        </div>
-
+        <select id="month" name="month"></select>
         <label for="month">Год</label>
         <div id="year" class="button-group">
-          <button type="button" class="button button-pressed" id="2023">2023</button>
-          <button type="button" class="button button-default" id="2022">2022</button>
+          <button type="button" class="button button-pressed" id="2023">
+            2023
+          </button>
+          <button type="button" class="button button-default" id="2022">
+            2022
+          </button>
         </div>
       </form>
     </div>
@@ -38,7 +28,7 @@
     $(document).ready(function () {
       function collectData() {
         const data = {
-          month: parseInt($("#month").find(".button-pressed").attr("id"), 10),
+          month: parseInt($("#month").val(), 10),
           year: parseInt($("#year").find(".button-pressed").attr("id"), 10),
         };
         Object.keys(data).forEach(
@@ -53,11 +43,11 @@
         }
         return data;
       }
-      $("#month").on("click", collectData);
+      $("#month").on("change", collectData);
       $("#year").on("click", collectData);
 
       const mainButton = window.Telegram.WebApp.MainButton;
-      mainButton.text = "Опубликовать";
+      mainButton.text = "Получить отчет";
       mainButton.enable();
       mainButton.onClick(function () {
         window.Telegram.WebApp.sendData(JSON.stringify(collectData()));
