@@ -3,11 +3,13 @@
   --border-color: #ccc;
   --bg-color: #eee;
   --bg-color-2: #fff;
+  --fg-color: #222;
 }
 
 label {
   font-size: 4vw;
   display: block;
+  color: var(--fg-color);
 }
 
 input[type="text"],
@@ -17,11 +19,13 @@ textarea {
   padding: 2vw;
   margin: 2vw 0;
   display: inline-block;
-  border: 1px solid var(--border-color);
   border-radius: 1vw;
   box-sizing: border-box;
   font-size: 4vw;
+
+  border: 1px solid var(--border-color);
   background-color: var(--bg-color-2);
+  color: var(--fg-color);
 }
 
 input[type="number"] {
@@ -29,10 +33,13 @@ input[type="number"] {
   padding: 2vw;
   margin: 2vw 0;
   display: inline-block;
-  border: 1px solid var(--border-color);
   border-radius: 1vw;
   box-sizing: border-box;
   font-size: 4vw;
+
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color-2);
+  color: var(--fg-color);
 }
 
 input[type="tel"] {
@@ -40,10 +47,12 @@ input[type="tel"] {
   padding: 2vw;
   margin: 2vw 0;
   display: inline-block;
-  border: 1px solid var(--border-color);
   border-radius: 1vw;
   box-sizing: border-box;
   font-size: 4vw;
+
+  border: 1px solid var(--border-color);
+  color: var(--fg-color);
 }
 
 #price,
@@ -89,16 +98,19 @@ div {
   width: 100%;
   padding: 2.5%;
   display: inline;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-color-2);
   border-radius: 1vw;
   box-sizing: border-box;
   font-size: 4vw;
+
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color-2);
+  color: var(--fg-color);
 }
 
 .button-pressed {
   border: 1px solid var(--border-color);
   background-color: var(--border-color);
+  color: var(--fg-color);
 }
 
 .input-group {
