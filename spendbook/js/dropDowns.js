@@ -43,6 +43,21 @@ $(document).ready(function () {
   $.each(months, function (key, obj) {
     $("#month").append(`<option value="${obj.value}">${obj.text}</option>`);
   });
+  if (window.Telegram.WebApp.colorScheme === "dark") {
+    $(":root")
+      .css('--border-color-2', '#666')
+      .css('--border-color', '#222')
+      .css('--bg-color', '#444')
+      .css('--bg-color-2', '#666')
+      .css('--fg-color', '#eee');
+  } else {
+    $(":root")
+      .css('--border-color-2', '#aaa')
+      .css('--border-color', '#ccc')
+      .css('--bg-color', '#eee')
+      .css('--bg-color-2', '#fff')
+      .css('--fg-color', '#222');
+  }
 });
 
 $(".button-group").on("click", ".button", function () {
