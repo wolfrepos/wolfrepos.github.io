@@ -4,10 +4,11 @@
   --bg-color: #eee;
   --bg-color-2: #fff;
   --fg-color: #222;
+  --font-size: 5vw;
 }
 
 label {
-  font-size: 4vw;
+  font-size: var(--font-size);
   display: block;
   color: var(--fg-color);
 }
@@ -21,7 +22,7 @@ textarea {
   display: inline-block;
   border-radius: 1vw;
   box-sizing: border-box;
-  font-size: 4vw;
+  font-size: var(--font-size);
 
   border: 1px solid var(--border-color);
   background-color: var(--bg-color-2);
@@ -35,7 +36,7 @@ input[type="number"] {
   display: inline-block;
   border-radius: 1vw;
   box-sizing: border-box;
-  font-size: 4vw;
+  font-size: var(--font-size);
 
   border: 1px solid var(--border-color);
   background-color: var(--bg-color-2);
@@ -49,7 +50,7 @@ input[type="tel"] {
   display: inline-block;
   border-radius: 1vw;
   box-sizing: border-box;
-  font-size: 4vw;
+  font-size: var(--font-size);
 
   border: 1px solid var(--border-color);
   color: var(--fg-color);
@@ -100,7 +101,7 @@ div {
   display: inline;
   border-radius: 1vw;
   box-sizing: border-box;
-  font-size: 4vw;
+  font-size: var(--font-size);
 
   border: 1px solid var(--border-color);
   background-color: var(--bg-color-2);
