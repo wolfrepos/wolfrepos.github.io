@@ -31,6 +31,7 @@
         return data;
       }
       $("#category").on("change", collectData);
+      $("#custom_input").on("input", collectData);
       $("#amount").on("input", collectData);
 
       $("#custom_label").hide();
