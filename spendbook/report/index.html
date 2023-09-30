@@ -40,6 +40,7 @@
       }
       $("#month").on("change", collectData);
       $("#year").on("click", collectData);
+      $("#month").val(new Date().getMonth()+1);
 
       const mainButton = window.Telegram.WebApp.MainButton;
       mainButton.text = "Получить отчет";
