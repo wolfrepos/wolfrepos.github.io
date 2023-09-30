@@ -1,24 +1,25 @@
 const categories = [
-  { text: "Прочее", value: "other" },
-  { text: "Автомобиль", value: "car" },
-  { text: "ЖКХ", value: "hcs" },
-  { text: "Квартира", value: "apartment" },
-  { text: "Красота", value: "beauty" },
-  { text: "Образование", value: "education" },
-  { text: "Одежда", value: "clothes" },
-  { text: "Подарки", value: "gifts" },
-  { text: "Путешествия", value: "travel" },
-  { text: "Рестораны", value: "restaurant" },
-  { text: "Благотворительность", value: "charity" },
-  { text: "Связь", value: "communication" },
-  { text: "Спорт", value: "sport" },
-  { text: "Супермаркеты", value: "supermarket" },
-  { text: "Техника", value: "appliances" },
-  { text: "Транспорт", value: "transport" },
-  { text: "Хобби", value: "hobby" },
-  { text: "Развлечения", value: "entertainment" },
-  { text: "Аптеки", value: "pharmacies" },
-  { text: "Медицина", value: "medicine" },
+  "Аптеки",
+  "Аренда квартиры",
+  "ЖКХ",
+  "Красота",
+  "Кредиты",
+  "Медицина",
+  "Образование",
+  "Одежда",
+  "Подарки",
+  "Подписки",
+  "Путешествия",
+  "Развлечения",
+  "Ремонт",
+  "Рестораны",
+  "Супермаркеты",
+  "Техника",
+  "Транспорт",
+  "Хобби",
+
+  // Должно быть последним
+  "Ввести свою категорию",
 ];
 
 const months = [
@@ -37,8 +38,8 @@ const months = [
 ];
 
 $(document).ready(function () {
-  $.each(categories, function (key, obj) {
-    $("#category").append(`<option value="${obj.value}">${obj.text}</option>`);
+  $.each(categories, function (key, str) {
+    $("#category").append(`<option value="${str}">${str}</option>`);
   });
   $.each(months, function (key, obj) {
     $("#month").append(`<option value="${obj.value}">${obj.text}</option>`);

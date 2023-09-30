@@ -9,8 +9,12 @@
   <script>
     $(document).ready(function () {
       function collectData() {
+        var category = $("#category").val();
+        if (category === categories[categories.length-1]) {
+          category = $("#custom_input").val();
+        }
         const data = {
-          category: $("#category").val(),
+          category: category,
           amount: parseInt($("#amount").val(), 10),
           description: $("#text").val(),
         };
@@ -28,6 +32,19 @@
       }
       $("#category").on("change", collectData);
       $("#amount").on("input", collectData);
+
+      $("#custom_label").hide();
+      $("#custom_input").hide();
+      $("#category").on("change", function() {
+        const category = $("#category").val();
+        if (category === categories[categories.length-1]) {
+          $("#custom_label").show();
+          $("#custom_input").show();
+        } else {
+          $("#custom_label").hide();
+          $("#custom_input").hide();
+        }
+      });
 
       const mainButton = window.Telegram.WebApp.MainButton;
       mainButton.text = "Отправить";
@@ -51,6 +68,10 @@
       <form>
         <label for="category">Категория траты</label>
         <select id="category" name="category"></select>
+
+        <label id="custom_label" for="custom">Своя категория</label>
+        <input id="custom_input" type="text" name="custom" placeholder="Своя категория"/>
+
         <label for="amount">Сумма траты</label>
         <input type="number" id="amount" name="amount" placeholder="Сумма" />
         <textarea
