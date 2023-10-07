@@ -17,6 +17,7 @@
           category: category,
           amount: parseInt($("#amount").val(), 10),
           description: $("#text").val(),
+          date: $("#date_input").val()
         };
         Object.keys(data).forEach(
           (key) =>
@@ -30,9 +31,25 @@
         }
         return data;
       }
+
+      function formatDate(date) {
+        var d = new Date(date),
+        month = "" + (d.getMonth() + 1),
+        day = "" + d.getDate(),
+        year = d.getFullYear();
+
+        if (month.length < 2) month = "0" + month;
+        if (day.length < 2) day = "0" + day;
+
+        return [year, month, day].join("-");
+      }
+      
+      $("#date_input").val(formatDate(new Date()));
+
       $("#category").on("change", collectData);
       $("#custom_input").on("input", collectData);
       $("#amount").on("input", collectData);
+      $("#date_input").on("change", collectData);
 
       $("#custom_label").hide();
       $("#custom_input").hide();
@@ -79,8 +96,10 @@
           id="text"
           name="text"
           placeholder="Комментарий"
-          rows="5"
+          rows="3"
         ></textarea>
+        <label for="amount">Дата</label>
+        <input type="date" id="date_input">
       </form>
     </div>
   </body>
