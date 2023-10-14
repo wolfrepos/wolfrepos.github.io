@@ -8,6 +8,27 @@
   </head>
   <script>
     $(document).ready(function () {
+      const searchParams = new URLSearchParams(window.location.search);
+      const chatId = searchParams.get("chatId");
+      const ip = "82.146.46.151"
+      const port = "5555"
+      fetch(`http://${ip}:${port}/categories?chatId=${chatId}`)
+        .then((response) => response.json())
+        .then((userCategories) => {
+          const categoriesFiltered = categories.filter(
+            (c) => !userCategories.includes(c)
+          );
+          const finalCategories = userCategories.concat(categoriesFiltered);
+          $.each(finalCategories, function (key, str) {
+            $("#category").append(`<option value="${str}">${str}</option>`);
+          });
+        })
+        .catch((error) =>
+          $.each(categories, function (key, str) {
+            $("#category").append(`<option value="${str}">${str}</option>`);
+          })
+        );
+
       function collectData() {
         var category = $("#category").val();
         if (category === categories[categories.length-1]) {
