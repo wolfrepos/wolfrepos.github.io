@@ -10,9 +10,7 @@
     $(document).ready(function () {
       const searchParams = new URLSearchParams(window.location.search);
       const chatId = searchParams.get("chatId");
-      const ip = "82.146.46.151"
-      const port = "5555"
-      fetch(`http://${ip}:${port}/categories?chatId=${chatId}`)
+      fetch(`https://spendbook.ru/categories?chatId=${chatId}`)
         .then((response) => response.json())
         .then((userCategories) => {
           const categoriesFiltered = categories.filter(
