@@ -36,7 +36,8 @@
           category: category,
           amount: parseInt($("#amount").val(), 10),
           description: $("#text").val(),
-          date: $("#date_input").val()
+          date: $("#date_input").val(),
+          timeOffset: new Date().getTimezoneOffset(),
         };
         Object.keys(data).forEach(
           (key) =>
