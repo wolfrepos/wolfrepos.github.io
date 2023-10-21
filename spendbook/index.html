@@ -32,9 +32,12 @@
         if (category === categories[categories.length-1]) {
           category = $("#custom_input").val();
         }
+        const rawAmountValue = parseInt($("#amount").val(), 10);
+        const absAmountValue = Math.abs(rawAmountValue)
+        $("#amount").val(absAmountValue);
         const data = {
           category: category,
-          amount: parseInt($("#amount").val(), 10),
+          amount: absAmountValue,
           description: $("#text").val(),
           date: $("#date_input").val(),
           timeOffset: new Date().getTimezoneOffset(),
