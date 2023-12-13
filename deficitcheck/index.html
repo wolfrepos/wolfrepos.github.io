@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../css/main.css" />
+  <link rel="stylesheet" type="text/css" href="./main.css" />
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="./main.js"></script>
+<script>
+  $(document).ready(function () {
+    const searchParams = new URLSearchParams(window.location.search);
+    const chatId = searchParams.get("chatId");
+
+    function collectData() {
+      var arr = [];
+      for (var i = 0; i < symptoms.length; i++) {
+        if ($(`#checkbox${i}`).is(":checked")) {
+          arr.push(i);
+        }
+      }
+      return arr;
+    }
+
+    $("input[type='checkbox']").change(function () {
+      console.log(collectData());
+    });
+
+    const mainButton = window.Telegram.WebApp.MainButton;
+    mainButton.text = "Отправить";
+    mainButton.enable();
+    mainButton.show();
+    mainButton.onClick(function () {
+      window.Telegram.WebApp.sendData(JSON.stringify(collectData()));
+    });
+  });
+</script>
+
+<body>
+  <div>
+    <form>
+      <div id="sheet"></div>
+    </form>
+  </div>
+</body>
+
+</html>
