@@ -66,6 +66,7 @@
                   const data = {
                       month: parseInt(dropdownInput.val(), 10),
                       year: parseInt($('input[name="year"]:checked').val(), 10),
+                      colorScheme: window.Telegram.WebApp.colorScheme,
                   };
                   Object.keys(data).forEach(
                       (key) =>
