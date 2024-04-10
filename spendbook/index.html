@@ -40,16 +40,16 @@
                     $.each(finalCategories, function (key, str) {
                         if (str === 'Ввести свою категорию') {
                             $('#custom-dropdown').append(
-                                `<li class="select-option" data-value="${str}">${str}</li>`
+                                `<li class="select-option" data-value="${str}"><span>${str}</span></li>`
                             )
                         } else {
                             $('#custom-dropdown').append(
                                 `<li class="select-option" data-value="${str}">
-                                ${str}
+                                <span>${str}</span>
 
                                 <label class="checkbox-label">
                                     <input type="checkbox" class="option-checkbox" name="category-checkbox" value="${str}">
-                                    <span class="checkmark"></span>
+                                    <span class="checkmark"><b>🗑️</b></span>
                                 </label>
                                </li>`
                             )
@@ -61,16 +61,16 @@
                     $.each(categories, function (key, str) {
                         if (str === 'Ввести свою категорию') {
                             $('#custom-dropdown').append(
-                                `<li class="select-option" data-value="${str}">${str}</li>`
+                                `<li class="select-option" data-value="${str}"><span>${str}</span></li>`
                             )
                         } else {
                             $('#custom-dropdown').append(
                                 `<li class="select-option" data-value="${str}">
-                                ${str}
+                                <span>${str}</span>
 
                                 <label class="checkbox-label">
                                     <input type="checkbox" class="option-checkbox" name="category-checkbox" value="${str}">
-                                    <span class="checkmark"></span>
+                                    <span class="checkmark"><b>🗑️</b></span>
                                 </label>
                                </li>`
                             )
@@ -92,7 +92,7 @@
                 })
 
                 $(this).addClass('selected')
-                dropdownButton.html($(this).text())
+                dropdownButton.html($(this).children('span').text())
                 dropdownInput.val($(this).attr('data-value'))
                 dropdownMenu.removeClass('select-options-visible')
 
