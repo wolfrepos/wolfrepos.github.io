@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Style Form</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #eaeaea;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+            color: #333;
+            transition: all 0.3s;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #0088cc;
+            background-color: #fff;
+            outline: none;
+        }
+        .multiselect {
+            position: relative;
+        }
+        .multiselect-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .multiselect-input input {
+            border: none;
+            flex: 1;
+            min-width: 80px;
+            background: none;
+        }
+        .multiselect-input input:focus {
+            outline: none;
+        }
+        .selected-item {
+            background-color: #0088cc;
+            color: #fff;
+            padding: 5px 8px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+        .selected-item .remove-btn {
+            margin-left: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .multiselect-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            max-height: 150px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .multiselect-options div {
+            padding: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .multiselect-options div:hover {
+            background-color: #0088cc;
+            color: #fff;
+        }
+        .multiselect-options div.hidden {
+            display: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: #0088cc;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0077b3;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const departureDateInput = document.querySelector('#departure-date');
+            const now = new Date();
+            const formattedDate = formatDateTimeLocal(now);
+            departureDateInput.value = formattedDate;
+
+            function formatDateTimeLocal(date) {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const hours = String(date.getHours()).padStart(2, '0');
+                const minutes = String(date.getMinutes()).padStart(2, '0');
+                return `${year}-${month}-${day}T${hours}:${minutes}`;
+            }
+
+            const input = document.querySelector('.multiselect-input input');
+            const optionsContainer = document.querySelector('.multiselect-options');
+            const selectedCitiesContainer = document.querySelector('.multiselect-input');
+            const cities = [
+                'Бишкек', 'Ош', 'Джалал-Абад', 'Каракол', 'Нарын', 
+                'Баткен', 'Талас', 'Токмок', 'Кара-Балта', 'Кант'
+            ];
+            const selectedCities = new Set();
+
+            function toggleOptions() {
+                optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
+            }
+
+            function filterOptions(event) {
+                const search = event.target.value.toLowerCase();
+                const options = optionsContainer.querySelectorAll('div');
+                options.forEach(option => {
+                    const city = option.textContent.toLowerCase();
+                    if (city.includes(search) && !selectedCities.has(city)) {
+                        option.classList.remove('hidden');
+                    } else {
+                        option.classList.add('hidden');
+                    }
+                });
+            }
+
+            function addCity(city) {
+                const cityItem = document.createElement('div');
+                cityItem.className = 'selected-item';
+                cityItem.textContent = city;
+
+                const removeBtn = document.createElement('span');
+                removeBtn.className = 'remove-btn';
+                removeBtn.textContent = 'x';
+                removeBtn.onclick = () => {
+                    selectedCities.delete(city.toLowerCase());
+                    selectedCitiesContainer.removeChild(cityItem);
+                    updateOptionsVisibility();
+                };
+
+                cityItem.appendChild(removeBtn);
+                selectedCitiesContainer.insertBefore(cityItem, input);
+                selectedCities.add(city.toLowerCase());
+                input.value = '';
+                updateOptionsVisibility();
+            }
+
+            function selectCity(event) {
+                const city = event.target.textContent;
+                if (!selectedCities.has(city.toLowerCase())) {
+                    addCity(city);
+                }
+                optionsContainer.style.display = 'none';
+            }
+
+            function updateOptionsVisibility() {
+                const options = optionsContainer.querySelectorAll('div');
+                options.forEach(option => {
+                    const city = option.textContent.toLowerCase();
+                    option.classList.toggle('hidden', selectedCities.has(city));
+                });
+            }
+
+            input.addEventListener('focus', toggleOptions);
+            input.addEventListener('input', filterOptions);
+
+            cities.forEach(city => {
+                const option = document.createElement('div');
+                option.textContent = city;
+                option.onclick = selectCity;
+                optionsContainer.appendChild(option);
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!selectedCitiesContainer.contains(event.target)) {
+                    optionsContainer.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <label for="departure-date">Дата и время отправления</label>
+                <input type="datetime-local" id="departure-date" name="departure-date">
+            </div>
+            <div class="form-group">
+                <label for="phone-number">Номер телефона</label>
+                <input type="tel" id="phone-number" name="phone-number" pattern="\+996 \d{3} \d{2} \d{2} \d{2}" placeholder="+996 559 17 17 75">
+            </div>
+            <div class="form-group">
+                <label for="comment">Комментарий</label>
+                <textarea id="comment" name="comment" maxlength="100" rows="3" placeholder="Введите комментарий..."></textarea>
+            </div>
+            <div class="form-group multiselect">
+                <label for="selected-cities">Выберите города</label>
+                <div class="multiselect-input">
+                    <input type="text" placeholder="Выберите города...">
+                </div>
+                <div class="multiselect-options"></div>
+            </div>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+</body>
+</html>
