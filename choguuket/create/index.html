@@ -3,72 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Style Form</title>
+    <title>Telegram Style Fullscreen Form</title>
     <style>
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #eaeaea;
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f3f3;
+            height: 100vh;
+            width: 100vw;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
         }
+
         .container {
             width: 100%;
-            max-width: 400px;
+            max-width: 380px;
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin: auto;
+            margin: 0;
+            border: 1px solid #e0e0e0;
+            height: 100%;
         }
+
         .form-group {
             margin-bottom: 15px;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
             font-size: 14px;
             color: #333;
         }
+
         input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
+            width: calc(100% - 20px);
+            padding: 12px;
+            border: 1px solid #e0e0e0;
             border-radius: 8px;
             font-size: 14px;
             background-color: #f9f9f9;
             color: #333;
             transition: all 0.3s;
+            margin-left: 10px;
         }
+
         input:focus, select:focus, textarea:focus {
             border-color: #0088cc;
-            background-color: #fff;
+            background-color: #ffffff;
             outline: none;
         }
+
         .multiselect {
             position: relative;
         }
+
         .multiselect-input {
             display: flex;
             flex-wrap: wrap;
             gap: 5px;
             padding: 8px;
-            border: 1px solid #ddd;
+            border: 1px solid #e0e0e0;
             border-radius: 8px;
             background-color: #f9f9f9;
         }
+
         .multiselect-input input {
             border: none;
             flex: 1;
             min-width: 80px;
             background: none;
+            margin-left: 10px;
         }
+
         .multiselect-input input:focus {
             outline: none;
         }
+
         .selected-item {
             background-color: #0088cc;
             color: #fff;
@@ -77,37 +96,43 @@
             display: flex;
             align-items: center;
         }
+
         .selected-item .remove-btn {
             margin-left: 5px;
             cursor: pointer;
             font-weight: bold;
         }
+
         .multiselect-options {
             position: absolute;
-            top: 100%;
+            bottom: 100%;
             left: 0;
             right: 0;
-            background-color: #fff;
-            border: 1px solid #ddd;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
             border-radius: 8px;
             max-height: 150px;
             overflow-y: auto;
             display: none;
             z-index: 1000;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 5px;
         }
+
         .multiselect-options div {
             padding: 8px;
             cursor: pointer;
             font-size: 14px;
         }
+
         .multiselect-options div:hover {
-            background-color: #0088cc;
-            color: #fff;
+            background-color: #f1f1f1;
         }
+
         .multiselect-options div.hidden {
             display: none;
         }
+
         button {
             width: 100%;
             padding: 12px;
@@ -119,6 +144,7 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
         button:hover {
             background-color: #0077b3;
         }
@@ -223,6 +249,13 @@
 <body>
     <div class="container">
         <form>
+            <div class="form-group multiselect">
+                <label for="selected-cities">Выберите города</label>
+                <div class="multiselect-input">
+                    <input type="text" placeholder="Выберите города...">
+                </div>
+                <div class="multiselect-options"></div>
+            </div>
             <div class="form-group">
                 <label for="departure-date">Дата и время отправления</label>
                 <input type="datetime-local" id="departure-date" name="departure-date">
@@ -234,13 +267,6 @@
             <div class="form-group">
                 <label for="comment">Комментарий</label>
                 <textarea id="comment" name="comment" maxlength="100" rows="3" placeholder="Введите комментарий..."></textarea>
-            </div>
-            <div class="form-group multiselect">
-                <label for="selected-cities">Выберите города</label>
-                <div class="multiselect-input">
-                    <input type="text" placeholder="Выберите города...">
-                </div>
-                <div class="multiselect-options"></div>
             </div>
             <button type="submit">Отправить</button>
         </form>
