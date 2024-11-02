@@ -13,6 +13,8 @@
     <script src="./js/dropDowns.js"></script>
     <script>
         $(document).ready(function () {
+            window.Telegram.WebApp.expand();
+            window.Telegram.WebApp.ready();
             const mainButton = window.Telegram.WebApp.MainButton;
             const searchParams = new URLSearchParams(window.location.search);
             const chatId = searchParams.get("chatId");
