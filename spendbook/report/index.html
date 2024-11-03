@@ -30,6 +30,10 @@
 
               const searchParams = new URLSearchParams(window.location.search);
               const chatId = searchParams.get("chatId");
+              const groupId = searchParams.get("groupId");
+              let categoriesUrl = groupId ? `https://spendbook.ru/categories?groupId=${groupId}` 
+                                          : `https://spendbook.ru/categories?chatId=${chatId}`;
+
 
               const dropdownInput = $('.hidden-input');
               let categoriesFromServer;
@@ -56,7 +60,7 @@
                   }
 
                   if (dropdownMenu.attr('id') === 'category-dropdown') {
-                      fetch(`https://spendbook.ru/categories?chatId=${chatId}`)
+                      fetch(categoriesUrl)
                           .then((response) => response.json())
                           .then((userCategories) => {
                               categoriesFromServer = userCategories

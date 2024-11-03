@@ -18,6 +18,11 @@
             const mainButton = window.Telegram.WebApp.MainButton;
             const searchParams = new URLSearchParams(window.location.search);
             const chatId = searchParams.get("chatId");
+            const groupId = searchParams.get("groupId");
+            let categoriesUrl = groupId ? `https://spendbook.ru/categories?groupId=${groupId}` 
+                                        : `https://spendbook.ru/categories?chatId=${chatId}`;
+
+            console.log(`chatId=${chatId} groupId=${groupId} categoriesUrl=${categoriesUrl}`)
 
             const dropdownButton = $('.select-button')
             const dropdownMenu = $('.select-options')
@@ -35,7 +40,7 @@
                 }
             })
 
-            fetch(`https://spendbook.ru/categories?chatId=${chatId}`)
+            fetch(categoriesUrl)
                 .then((response) => response.json())
                 .then((userCategories) => {
                     const finalCategories = ['Ввести свою категорию', ...userCategories];
