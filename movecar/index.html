@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centered Text</title>
+    <title>MoveCar</title>
     <style>
         body {
             display: flex;
@@ -19,12 +19,21 @@
     </style>
   </head>
   <body>
-    <h1>Мы написали владельцу авто - он скоро придет и переставит машину 😊</h1>
+    <div id="message"></div>
     <script>
       (function() {
         const searchParams = new URLSearchParams(window.location.search);
         const id = searchParams.get("id");
         fetch("https://spendbook.ru/movecar/notify?id=" + id)
+          .then(resp => {
+            if (resp.ok) {
+              document
+                .getElementById("message")
+                .innerHTML = "<h1>Мы написали владельцу авто - он скоро придет и переставит машину 😊</h1>"
+            } else {
+              window.location.replace("https://t.me/MoveCarBot?start=" + id);
+            }
+          })
       })();
     </script>
   </body>
