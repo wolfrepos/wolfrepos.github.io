@@ -6,15 +6,18 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
+    padding: 0 10px; /* Add padding to prevent content from touching the screen edge */
+    box-sizing: border-box;
 }
 
 .chat-container {
-    width: 90%;
+    width: 100%;
     max-width: 600px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 15px;
+    box-sizing: border-box;
 }
 
 .chat-box {
@@ -25,27 +28,46 @@ body {
     padding: 10px;
     margin-bottom: 15px;
     font-size: 18px;
+    background-color: #f9f9f9;
 }
 
 .chat-input {
-    width: 75%;
-    padding: 15px;
-    font-size: 18px;
+    width: 70%;
+    padding: 12px;
+    font-size: 16px;
     border: 2px solid #ddd;
     border-radius: 5px;
-    margin-right: 10px;
+    margin-right: 5px;
+    box-sizing: border-box;
 }
 
 .send-button {
-    padding: 15px 25px;
-    font-size: 18px;
+    width: 25%;
+    padding: 12px;
+    font-size: 16px;
     border: none;
     background-color: #28a745;
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .send-button:hover {
     background-color: #218838;
+}
+
+@media (max-width: 600px) {
+    .chat-input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .send-button {
+        width: 100%;
+    }
+
+    .chat-container {
+        padding: 10px;
+    }
 }
