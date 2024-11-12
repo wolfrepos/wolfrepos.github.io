@@ -24,7 +24,7 @@ body {
 }
 
 .chat-box {
-    height: 200px;
+    height: 25vh;
     overflow-y: auto;
     border: 2px solid #ddd;
     border-radius: 5px;
