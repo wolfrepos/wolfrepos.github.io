@@ -6,30 +6,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoveCar</title>
     <style>
-        body {
+        div {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             margin: 0;
             font-size: 2vh;
             font-family: Arial, sans-serif;
             text-align: center;
         }
+
+        .rounded-red-button {
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 5vh;
+        }
+
+        .disabled-button {
+            background-color: grey;
+            cursor: not-allowed;
+        }
     </style>
   </head>
   <body>
     <div id="message"></div>
+    <div>
+      <button class="rounded-red-button" onclick="handleButtonClick(this)">
+        Передвиньте машину
+      </button>
+    </div>
     <script>
+      function handleButtonClick(button) {
+          const searchParams = new URLSearchParams(window.location.search);
+          const id = searchParams.get("id");
+          fetch("https://spendbook.ru/movecar/notify?id=" + id)
+
+          button.disabled = true;
+          button.classList.add('disabled-button');
+          let countdown = 60;
+
+          document
+            .getElementById("message")
+            .innerHTML = `<h1>Владельцу авто отправлено уведомление!\nМожно отправить повторно через ${countdown} сек.</h1>`;
+          
+          const interval = setInterval(() => {
+              countdown--;
+              document
+                .getElementById("message")
+                .innerHTML = `<h1>Владельцу авто отправлено уведомление!\nМожно отправить повторно через ${countdown} сек.</h1>`;
+
+              if (countdown <= 0) {
+                  document
+                    .getElementById("message")
+                    .innerHTML = `<h1>Владельцу авто отправлено уведомление!\nМожно отправить повторно</h1>`;
+                  clearInterval(interval);
+                  button.disabled = false;
+                  button.classList.remove('disabled-button');
+              }
+          }, 1000); // 1 second interval
+      }
+
       (function() {
         const searchParams = new URLSearchParams(window.location.search);
         const id = searchParams.get("id");
-        fetch("https://spendbook.ru/movecar/notify?id=" + id)
+        fetch("https://spendbook.ru/movecar/exists?id=" + id)
           .then(resp => {
             if (resp.ok) {
               document
                 .getElementById("message")
-                .innerHTML = "<h1>Мы написали владельцу авто - он скоро придет и переставит машину 😊</h1>"
+                .innerHTML = "<h1>Нажмите на кнопку и владелец авто получит уведомление</h1>"
             } else {
               document
                 .getElementById("message")
