@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!-- Отключаем масштабирование -->
     <title>Форма Аптеки</title>
     <style>
         body {
@@ -12,19 +12,19 @@
             height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Ставим форму наверх */
+            align-items: flex-start;
             background: linear-gradient(135deg, #2a6edb, #71b8f2);
             color: #333;
-            overflow: hidden; /* Убираем скроллинг */
+            overflow: hidden;
         }
         .form-container {
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 20px 15px; /* Уменьшенные отступы для мобильных */
+            padding: 20px 15px;
             width: 100%;
             max-width: 400px;
-            margin: 20px 10px; /* Отступ сверху */
+            margin: 20px 10px;
             box-sizing: border-box;
         }
         .form-container h1 {
@@ -44,7 +44,7 @@
         .form-group input {
             width: 100%;
             padding: 10px;
-            font-size: 14px;
+            font-size: 16px; /* Минимальный размер шрифта для предотвращения автозума */
             border: 1px solid #dcdcdc;
             border-radius: 8px;
             outline: none;
@@ -67,23 +67,6 @@
         }
         .form-button:hover {
             background-color: #1a4eb5;
-        }
-        @media (max-width: 768px) {
-            .form-container {
-                margin: 10px 5px; /* Меньше отступов на маленьких экранах */
-                padding: 15px 10px; /* Меньше внутреннего отступа */
-            }
-            .form-container h1 {
-                font-size: 16px; /* Меньше шрифт заголовка */
-            }
-            .form-group input {
-                padding: 8px; /* Меньше отступов у полей */
-                font-size: 13px;
-            }
-            .form-button {
-                padding: 8px;
-                font-size: 13px;
-            }
         }
     </style>
 </head>
