@@ -10,20 +10,20 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             background: linear-gradient(135deg, #2a6edb, #71b8f2);
             color: #333;
+            display: flex;
+            justify-content: center; /* Центрируем по горизонтали */
         }
         .form-container {
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 20px 30px; /* Добавлен padding */
+            padding: 20px 30px;
             width: 100%;
             max-width: 400px;
-            box-sizing: border-box; /* Учитывает padding */
+            margin-top: 50px; /* Отступ сверху */
+            box-sizing: border-box;
         }
         .form-container h1 {
             font-size: 18px;
@@ -40,14 +40,14 @@
             margin-bottom: 5px;
         }
         .form-group input {
-            width: 100%; /* Поля растянуты на всю ширину */
+            width: 100%;
             padding: 10px;
             font-size: 14px;
             border: 1px solid #dcdcdc;
             border-radius: 8px;
             outline: none;
             transition: border-color 0.3s ease;
-            box-sizing: border-box; /* Учитывает padding */
+            box-sizing: border-box;
         }
         .form-group input:focus {
             border-color: #2a6edb;
