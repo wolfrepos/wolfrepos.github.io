@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Информация об аптеках</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .card {
+      position: relative;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .card h3 {
+      margin: 0 0 8px;
+    }
+    .card p {
+      margin: 4px 0;
+    }
+    .medicines {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0;
+    }
+    .medicine-item {
+      background-color: #f1f1f1;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .call-button {
+      position: absolute;
+      top: 50%;
+      right: 16px;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 50%;
+      background-color: #28a745; /* Мягкий зелёный цвет */
+      color: #fff;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .call-button:hover {
+      background-color: #218838; /* Более тёмный зелёный при наведении */
+    }
+  </style>
+</head>
+<body>
+  <div id="pharmacy-list"></div>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const requestId = urlParams.get('request_id');
+
+    if (requestId) {
+      // Запрос данных с backend
+      fetch(`https://ainur-khakimov.ru/apteka/request/${requestId}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Ошибка HTTP: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => renderPharmacies(data))
+        .catch(error => {
+          document.getElementById('error-message').textContent = `Не удалось загрузить данные: ${error.message}`;
+        });
+    } else {
+      document.getElementById('error-message').textContent = 'Параметр request_id отсутствует в URL.';
+    }
+
+    // Функция для отображения списка аптек
+    function renderPharmacies(pharmacies) {
+      const pharmacyList = document.getElementById('pharmacy-list');
+      pharmacies.forEach(pharmacy => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        const addressLink = `https://2gis.ru/search/${encodeURIComponent(pharmacy.address)}`;
+        card.innerHTML = `
+          <h3>${pharmacy.name}</h3>
+          <p><strong>Адрес:</strong> <a href="${addressLink}" target="_blank">${pharmacy.address}</a></p>
+          <p><strong>Лекарства в наличии:</strong></p>
+          <div class="medicines">
+            ${pharmacy.medicines.map(med => `<div class="medicine-item">${med}</div>`).join('')}
+          </div>
+          <button class="call-button" onclick="window.location.href='tel:${pharmacy.phone}'">📞</button>
+        `;
+
+        pharmacyList.appendChild(card);
+      });
+    }
+
+    // Отображение тестовых данных
+    renderPharmacies(testData);
+  </script>
+</body>
+</html>
