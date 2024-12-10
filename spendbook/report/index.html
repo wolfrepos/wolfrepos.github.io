@@ -29,11 +29,8 @@
               window.Telegram.WebApp.ready();
 
               const searchParams = new URLSearchParams(window.location.search);
-              const chatId = searchParams.get("chatId");
               const groupId = searchParams.get("groupId");
-              let categoriesUrl = groupId ? `https://ainur-khakimov.ru/spendbook/categories?groupId=${groupId}` 
-                                          : `https://ainur-khakimov.ru/spendbook/categories?chatId=${chatId}`;
-
+              let categoriesUrl = `https://ainur-khakimov.ru/spendbook/categories?groupId=${groupId}`;
 
               const dropdownInput = $('.hidden-input');
               let categoriesFromServer;
