@@ -30,7 +30,40 @@
 
               const searchParams = new URLSearchParams(window.location.search);
               const groupId = searchParams.get("groupId");
-              let categoriesUrl = `https://ainur-khakimov.ru/spendbook/categories?groupId=${groupId}`;
+              let categoriesUrl1 = `https://ainur-khakimov.ru/spendbook/categories?groupId=${groupId}`;
+              let categoriesUrl2 = `https://spendbook.ru/spendbook/categories?groupId=${groupId}`;
+              const TIMEOUT = 3000; // 2 секунды
+
+              const fetchWithTimeout = (url, timeout) => {
+                  return Promise.race([
+                      fetch(url).then((response) => {
+                          if (!response.ok) {
+                              throw new Error(`Request to ${url} failed with status ${response.status}`);
+                          }
+                          return response;
+                      }),
+                      new Promise((_, reject) => setTimeout(() => reject(new Error('Request timed out')), timeout)),
+                  ]);
+              };
+
+              const fetchCategories = async () => {
+                  try {
+                      const data = await fetchWithTimeout(categoriesUrl1, TIMEOUT);
+                      console.log('Fetched from first URL:', data);
+                      return data;
+                  } catch (error) {
+                      console.warn('First URL failed:', error.message);
+                  
+                      try {
+                          const fallbackData = await fetchWithTimeout(categoriesUrl2, TIMEOUT);
+                          console.log('Fetched from second URL:', fallbackData);
+                          return fallbackData;
+                      } catch (fallbackError) {
+                          console.error('Second URL also failed:', fallbackError.message);
+                          throw new Error('Both requests failed');
+                      }
+                  }
+              };
 
               const dropdownInput = $('.hidden-input');
               let categoriesFromServer;
@@ -57,7 +90,7 @@
                   }
 
                   if (dropdownMenu.attr('id') === 'category-dropdown') {
-                      fetch(categoriesUrl)
+                      fetchCategories()   
                           .then((response) => response.json())
                           .then((userCategories) => {
                               categoriesFromServer = userCategories
