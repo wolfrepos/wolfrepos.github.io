@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Listings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .card {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 16px;
+            padding: 16px;
+        }
+        .card img {
+            width: auto;
+            max-height: 100px;
+            border-radius: 8px;
+            margin-right: 16px;
+        }
+        .card-content {
+            flex-grow: 1;
+        }
+        .card h2 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        .card p {
+            margin: 8px 0;
+            color: #555;
+        }
+        .phone-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #28a745;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="property-list"></div>
+
+<script>
+    // Extract user_id from URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('user_id');
+
+    // Fetch data from backend
+    fetch(`https://ainur-khakimov.ru/dom24/houses?owner_id=${userId}`)
+        .then(response => response.json())
+        .then(data => {
+            const propertyList = document.getElementById('property-list');
+
+            data.forEach(property => {
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                let photosHtml = '';
+                if (property.photo_ids && property.photo_ids.length > 0) {
+                    photosHtml = `<img src="https://ainur-khakimov.ru/dom24/houses/photo?id=${property.photo_ids[0]}" alt="Property Image">`;
+                }
+
+                card.innerHTML = `
+                    ${photosHtml}
+                    <div class="card-content">
+                        <h2>${property.city}, ${property.address}</h2>
+                        <p>Rooms: ${property.room_count}</p>
+                    </div>
+                    <a href="tel:${property.phone}" class="phone-icon">📞</a>
+                `;
+
+                propertyList.appendChild(card);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching properties:', error);
+        });
+</script>
+
+</body>
+</html>
