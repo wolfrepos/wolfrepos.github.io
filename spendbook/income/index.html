@@ -191,7 +191,10 @@
                 } else {
                     enableSubmit(false);
                 }
-                return data;
+                return {
+	                RequestType: "WriteIncome",
+	                Income: data
+                };
             }
 
             function formatDate(date) {
