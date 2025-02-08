@@ -17,6 +17,7 @@
             const mainButton = window.Telegram.WebApp.MainButton;
             const searchParams = new URLSearchParams(window.location.search);
             const groupId = searchParams.get("groupId");
+            const lang = searchParams.get("lang") || "ru";
             let categoriesUrl1 = `https://ainur-khakimov.ru/spendbook/income/categories?groupId=${groupId}`;
             let categoriesUrl2 = `https://spendbook.ru/spendbook/income/categories?groupId=${groupId}`;
             const TIMEOUT = 3000; // 2 секунды
@@ -24,6 +25,15 @@
             const dropdownButton = $('.select-button')
             const dropdownMenu = $('.select-options')
             const dropdownInput = $('.hidden-input')
+
+            document.getElementById("category-span").innerText = text[lang].Category;
+            document.getElementById("category-button").innerText = text[lang].Category;
+
+            document.getElementById("custom_label").innerText = text[lang].OwnCategory;
+            document.getElementById("custom_input").placeholder = text[lang].OwnCategory;
+
+            document.getElementById("amount_label").innerText = text[lang]["amount_label"];
+            document.getElementById("amount").placeholder = text[lang]["amount"];
 
             const fetchWithTimeout = (url, timeout) => {
                 return Promise.race([
@@ -71,9 +81,9 @@
             fetchCategories()
                 .then((response) => response.json())
                 .then((userCategories) => {
-                    const finalCategories = ['Ввести свою категорию', ...userCategories];
+                    const finalCategories = [text[lang].InputCategory, ...userCategories];
                     $.each(finalCategories, function (key, str) {
-                        if (str === 'Ввести свою категорию') {
+                        if (str === text[lang].InputCategory) {
                             $('#custom-dropdown').append(
                                 `<li class="select-option" data-value="${str}"><span>${str}</span></li>`
                             )
@@ -94,7 +104,7 @@
                 .catch((error) => {
                     console.error(error);
                     $.each(incomeCategories, function (key, str) {
-                        if (str === 'Ввести свою категорию') {
+                        if (str === text[lang].InputCategory) {
                             $('#custom-dropdown').append(
                                 `<li class="select-option" data-value="${str}"><span>${str}</span></li>`
                             )
@@ -131,7 +141,7 @@
                 dropdownInput.val($(this).attr('data-value'))
                 dropdownMenu.removeClass('select-options-visible')
 
-                if (dropdownInput.val() === 'Ввести свою категорию') {
+                if (dropdownInput.val() === text[lang].InputCategory) {
                     $(".custom-category").show();
                 } else {
                     $(".custom-category").hide();
@@ -154,7 +164,7 @@
                         $(this).attr('disabled', true)
                     })
 
-                    mainButton.text = "Подтвердить удаление";
+                    mainButton.text = text[lang].ConfirmDelete;
                     enableSubmit(true)
                 } else {
                     $('.select-options .select-option').each(function () {
@@ -167,7 +177,7 @@
 
             function collectData() {
                 var category = $(".hidden-input").val();
-                if (category === 'Ввести свою категорию') {
+                if (category === text[lang].InputCategory) {
                     category = $("#custom_input").val();
                 }
                 const rawAmountValue = parseInt($("#amount").val(), 10);
@@ -186,7 +196,7 @@
                         data[key] === "any" || data[key] === "" ? null : data[key])
                 );
                 if (data.income_category && data.income_amount) {
-                    mainButton.text = "Отправить";
+                    mainButton.text = text[lang].Send;
                     enableSubmit(true);
                 } else {
                     enableSubmit(false);
@@ -251,8 +261,8 @@
 <body>
     <form class="form">
         <div class="field-wrapper">
-            <span class="label">Категория дохода</span>
-            <button class="select-button" type="button">Категория</button>
+            <span id="category-span" class="label">Категория дохода</span>
+            <button id="category-button" class="select-button" type="button">Категория</button>
         </div>
         <ul id="custom-dropdown" class="select-options"></ul>
 
@@ -266,7 +276,7 @@
         </div>
 
         <div class="field-wrapper">
-            <label for="amount" class="label">Сумма дохода</label>
+            <label id="amount_label" for="amount" class="label">Сумма дохода</label>
             <input type="number" id="amount" name="amount" placeholder="Сумма" class="text-field" />
         </div>
 
