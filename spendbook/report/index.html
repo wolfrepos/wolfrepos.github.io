@@ -30,9 +30,21 @@
 
               const searchParams = new URLSearchParams(window.location.search);
               const groupId = searchParams.get("groupId");
+              const lang = searchParams.get("lang") || "ru";
               let categoriesUrl1 = `https://ainur-khakimov.ru/spendbook/categories?groupId=${groupId}`;
               let categoriesUrl2 = `https://spendbook.ru/spendbook/categories?groupId=${groupId}`;
-              const TIMEOUT = 3000; // 2 секунды
+              const TIMEOUT = 3000;
+
+              document.getElementById("month_report").innerText = text[lang]["month_report"];
+              document.getElementById("category_report").innerText = text[lang]["category_report"];
+
+              document.getElementById("month_span").innerText = text[lang]["month"];
+              document.getElementById("month_button").innerText = text[lang]["month"];
+
+              document.getElementById("category_span").innerText = text[lang].Category;
+              document.getElementById("category_button").innerText = text[lang].Category;
+
+              document.getElementById("year_span").innerText = text[lang]["year_span"];
 
               const fetchWithTimeout = (url, timeout) => {
                   return Promise.race([
@@ -108,7 +120,7 @@
                               categoriesFromServer = categories
 
                               $.each(categories, function (key, str) {
-                                  if (str !== 'Ввести свою категорию') {
+                                  if (str !== text[lang].InputCategory) {
                                       dropdownMenu.append(
                                           `<li class="select-option" value="${str}">${str}</li>`
                                       )
@@ -194,7 +206,7 @@
               }
 
               const mainButton = window.Telegram.WebApp.MainButton;
-              mainButton.text = "Получить отчет";
+              mainButton.text = text[lang]["get_report"];
               mainButton.enable();
               mainButton.show();
               mainButton.onClick(function () {
@@ -209,26 +221,26 @@
     <div class="report-buttons">
         <label class="report-input-label">
             <input type="radio" name="report" value="month" class="radio-input" checked />
-            <span>Отчет по месяцу</span>
+            <span id="month_report">Отчет по месяцу</span>
         </label>
         <label class="report-input-label">
             <input type="radio" name="report" value="category" class="radio-input" />
-            <span>Отчет по категории</span>
+            <span id="category_report">Отчет по категории</span>
         </label>
     </div>
 
     <div class="custom-select month-select">
         <div class="field-wrapper">
-            <span class="label">Месяц</span>
-            <button class="select-button" type="button">Месяц</button>
+            <span id="month_span" class="label">Месяц</span>
+            <button id="month_button" class="select-button" type="button">Месяц</button>
         </div>
         <ul id="custom-dropdown" class="select-options"></ul>
     </div>
 
       <div class="custom-select category-select">
           <div class="field-wrapper">
-              <span class="label">Категория</span>
-              <button class="select-button" type="button">Категория</button>
+              <span id="category_span" class="label">Категория</span>
+              <button id="category_button" class="select-button" type="button">Категория</button>
           </div>
           <ul id="category-dropdown" class="select-options"></ul>
       </div>
@@ -238,7 +250,7 @@
     </label>
 
       <div class="field-wrapper">
-          <span class="label">Год</span>
+          <span id="year_span" class="label">Год</span>
           <label class="radio-input-label">
               <input type="radio" name="year" value="2025" class="radio-input" checked/>
               <span class="radio-input-text">2025</span>
