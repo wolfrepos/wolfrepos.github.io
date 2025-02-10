@@ -73,11 +73,9 @@
                 const toDate = $('#date_to_input').val();
 
                 const data = {
-                    year: parseInt($('input[name="year"]:checked').val(), 10),
                     colorScheme: window.Telegram.WebApp.colorScheme,
                     fromDate: fromDate,
                     toDate: toDate,
-                    category: dropdownInput.val() || null,
                     RequestType: "Report",
                 };
 
