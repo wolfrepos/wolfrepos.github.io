@@ -34,6 +34,8 @@ const text = {
     "month": "Месяц",
     "year_span": "Год",
     "year_span": "Год",
+    "date_from_input": "Дата с",
+    "date_to_input": "Дата по"
   },
   "kg": {
     InputCategory: "Өз категорияңызды киргизуу",
@@ -48,5 +50,7 @@ const text = {
     "category_report": "Категория отчету",
     "month": "Ай",
     "year_span": "Жыл",
+    "date_from_input": "Башталган күн",
+    "date_to_input": "Бүткөн күн"
   }
 }

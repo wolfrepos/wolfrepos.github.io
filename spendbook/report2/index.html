@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Report page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../styles.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="../js/dropDowns.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            window.Telegram.WebApp.expand();
+            window.Telegram.WebApp.ready();
+
+            const searchParams = new URLSearchParams(window.location.search);
+            const lang = searchParams.get("lang") || "ru";
+
+            document.getElementById("date_from_input").innerText = text[lang]["date_from_input"];
+            document.getElementById("date_to_input").innerText = text[lang]["date_to_input"];
+
+            const today = new Date();
+            const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+            const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+            function formatDate(date) {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }
+
+            $('#date_from_input').val(formatDate(firstDayOfMonth));
+            $('#date_to_input').val(formatDate(lastDayOfMonth));
+
+            $('.custom-select').each(function () {
+                const dropdownButton = $(this).children('.field-wrapper').children('.select-button');
+                const dropdownMenu = $(this).children('.select-options');
+
+                dropdownButton.on('click', function () {
+                    dropdownMenu.toggleClass('select-options-visible');
+                    $(this).toggleClass('dropdown__button_active');
+                });
+
+                dropdownMenu.on('click', '.select-option', function () {
+                    dropdownMenu.children('.select-option').each(function () {
+                        if ($(this).hasClass('selected')) {
+                            $(this).removeClass('selected')
+                        }
+                    })
+
+                    $(this).addClass('selected')
+                    dropdownButton.html($(this).text())
+                    dropdownInput.val($(this).attr('value'))
+                    dropdownMenu.removeClass('select-options-visible')
+
+                    collectData();
+                });
+
+
+                $(document).on('keydown', function (e) {
+                    if (e.key === 'Tab' || e.key === 'Escape') {
+                        dropdownButton.removeClass('dropdown__button_active');
+                        dropdownMenu.removeClass('select-options-visible');
+                    }
+                })
+            });
+
+            function collectData() {
+                const fromDate = $('#date_from_input').val();
+                const toDate = $('#date_to_input').val();
+
+                const data = {
+                    year: parseInt($('input[name="year"]:checked').val(), 10),
+                    colorScheme: window.Telegram.WebApp.colorScheme,
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    category: dropdownInput.val() || null,
+                    RequestType: "Report",
+                };
+
+                Object.keys(data).forEach(
+                    (key) =>
+                    (data[key] =
+                        data[key] === "any" || data[key] === "" ? null : data[key])
+                );
+
+                return data;
+            }
+
+            const mainButton = window.Telegram.WebApp.MainButton;
+            mainButton.text = text[lang]["get_report"];
+            mainButton.enable();
+            mainButton.show();
+            mainButton.onClick(function () {
+                window.Telegram.WebApp.sendData(JSON.stringify(collectData()));
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <form class="form">
+        <div class="field-wrapper">
+            <label for="amount" class="label">Дата с</label>
+            <input type="date" id="date_from_input" class="text-field">
+        </div>
+
+        <div class="field-wrapper">
+            <label for="amount" class="label">Дата по</label>
+            <input type="date" id="date_to_input" class="text-field">
+        </div>
+    </form>
+</body>
+
+</html>
