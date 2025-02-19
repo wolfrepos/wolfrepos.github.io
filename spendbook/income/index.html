@@ -33,7 +33,7 @@
             document.getElementById("custom_label").innerText = text[lang].OwnCategory;
             document.getElementById("custom_input").placeholder = text[lang].OwnCategory;
 
-            document.getElementById("amount_label").innerText = text[lang]["amount_label"];
+            document.getElementById("income_amount_label").innerText = text[lang]["income_amount_label"];
             document.getElementById("amount").placeholder = text[lang]["amount"];
 
             const fetchWithTimeout = (url, timeout) => {
@@ -285,7 +285,7 @@
         </div>
 
         <div class="field-wrapper">
-            <label id="amount_label" for="amount" class="label">Сумма дохода</label>
+            <label id="income_amount_label" for="amount" class="label">Сумма дохода</label>
             <input type="number" id="amount" name="amount" placeholder="Сумма" class="text-field" />
         </div>
 
