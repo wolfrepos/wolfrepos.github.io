@@ -38,7 +38,7 @@ const text = {
     "date_from_input": "Дата с",
     "date_to_input": "Дата по"
   },
-  "kg": {
+  "ky": {
     InputCategory: "Өз категорияңызды киргизуу",
     ConfirmDelete: "Өчүрүүнү тастыкташ",
     Send: "Жөнөтүү",
@@ -54,5 +54,22 @@ const text = {
     "year_span": "Жыл",
     "date_from_input": "Башталган күн",
     "date_to_input": "Бүткөн күн"
+  },
+  "en": {
+    InputCategory: "Enter your category",
+    ConfirmDelete: "Confirm deletion",
+    Send: "Send",
+    Category: "Category",
+    OwnCategory: "New category",
+    "amount_label": "Expense amount",
+    "income_amount_label": "Income amount",
+    "amount": "Amount",
+    "get_report": "Get report",
+    "month_report": "Monthly report",
+    "category_report": "Category report",
+    "month": "Month",
+    "year_span": "Year",
+    "date_from_input": "Date from",
+    "date_to_input": "Date to"
   }
 }
