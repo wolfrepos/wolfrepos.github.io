@@ -36,7 +36,9 @@ const text = {
     "year_span": "Год",
     "year_span": "Год",
     "date_from_input": "Дата с",
-    "date_to_input": "Дата по"
+    "date_to_input": "Дата по",
+    "comment": "Комментарий",
+    "comment_text": "Комментарий"
   },
   "ky": {
     InputCategory: "Өз категорияңызды киргизуу",
@@ -53,7 +55,9 @@ const text = {
     "month": "Ай",
     "year_span": "Жыл",
     "date_from_input": "Башталган күн",
-    "date_to_input": "Бүткөн күн"
+    "date_to_input": "Бүткөн күн",
+    "comment": "Комментарий",
+    "comment_text": "Комментарий"
   },
   "en": {
     InputCategory: "Enter your category",
@@ -70,6 +74,8 @@ const text = {
     "month": "Month",
     "year_span": "Year",
     "date_from_input": "Date from",
-    "date_to_input": "Date to"
+    "date_to_input": "Date to",
+    "comment": "Comment",
+    "comment_text": "Comment"
   }
 }

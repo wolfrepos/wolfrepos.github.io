@@ -36,6 +36,9 @@
             document.getElementById("income_amount_label").innerText = text[lang]["income_amount_label"];
             document.getElementById("amount").placeholder = text[lang]["amount"];
 
+            document.getElementById("comment").innerText = text[lang]["comment"];
+            document.getElementById("comment_text").placeholder = text[lang]["comment_text"];
+
             const fetchWithTimeout = (url, timeout) => {
                 return Promise.race([
                     fetch(url).then((response) => {
@@ -187,7 +190,7 @@
                 const data = {
                     income_category: category,
                     income_amount: absAmountValue,
-                    income_description: $("#text").val(),
+                    income_description: $("#comment_text").val(),
                     date: $("#date_input").val(),
                     timeOffset: new Date().getTimezoneOffset(),
                 };
@@ -290,8 +293,8 @@
         </div>
 
         <div class="field-wrapper">
-            <label for="text" class="label">Комментарий</label>
-            <textarea id="text" name="text" placeholder="Комментарий" rows="3" class="text-field"></textarea>
+            <label id="comment" for="text" class="label">Комментарий</label>
+            <textarea id="comment_text" name="text" placeholder="Комментарий" rows="3" class="text-field"></textarea>
         </div>
 
         <div class="field-wrapper">
